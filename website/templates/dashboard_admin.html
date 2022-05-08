@@ -1,0 +1,124 @@
+{% extends 'topnav.html' %}
+{% block body %}
+<head>
+<meta charset="utf-8">
+<title>Admin Dashboard</title>
+<!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.--><script>var __adobewebfontsappname__="dreamweaver"</script><script src="http://use.edgefonts.net/allerta:n4:default.js" type="text/javascript"></script>
+</head>
+	<style>
+		* {box-sizing: border-box}
+
+/* Full-width input fields */
+  input[type=text], input[type=password], input[type=email]{
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+h1 {
+    text-align: center;
+}
+
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity:1;
+}
+
+
+/* Add padding to container elements */
+.container {
+    padding: 16px;
+    background-color: #545E75;
+    color: #FFFFFF;
+    font-family: allerta;
+    font-style: normal;
+    font-weight: 400;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+body footer {
+    font-family: allerta;
+    font-style: normal;
+    font-weight: 400;
+    text-align: center;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .signupbtn {
+    width: 100%;
+  }
+}
+	</style>
+
+<body>
+  <div class="container">
+    <h1>Admin Dashboard</h1>
+          <form method="POST" action="{{url_for('web.finduser')}}">
+    <input type="search" placeholder="Dispatcher ID" name="dispatcherid">
+    <button type="submit">Search Users</button>
+</form>
+<p>{{user}}</p>
+      <div class="container">
+      <form action="{{url_for('web.updateuser')}}" method="post" style="border:1px solid #ccc">
+
+    <label for="id"><b>ID</b></label>
+    <input type="text" value="{{final_user_data[5]}}" name="id" readonly>
+
+    <label for="permission"><b>Permission Level</b></label>
+    <input type="text" placeholder="{{final_user_data[3]}}" name="permission">
+
+    <label for="email"><b>Email</b></label>
+    <input type="email" placeholder="{{final_user_data[0]}}" name="email">
+
+      <label for="name"><b>Name</b></label>
+    <input type="text" placeholder="{{final_user_data[2]}}" name="name">
+
+      <label><b>Dispatcher ID | 3 digit location & 3 digit numeric; ex: QCA001, CON001</b></label>
+    <input type="text" placeholder="{{final_user_data[1]}}" name="dispatcherid">
+
+          <label><b>Credit | ex: @Quietcorneralrt, John Doe</b></label>
+    <input type="text" placeholder="{{final_user_data[6]}}" name="credit">
+
+          <label><b>Phone Number</b></label>
+    <input type="text" placeholder="{{final_user_data[7]}}" name="phone">
+
+    <label for="psw"><b>New Password | 6 character minimum</b></label>
+    <input type="password" placeholder="Enter Password" name="password" minlength="6">
+
+    <label for="psw-repeat"><b>Repeat New Password</b></label>
+    <input type="password" placeholder="Repeat Password" name="password2" minlength="6">
+      <div class="clearfix">
+      <button type="submit" class="modifybtn">Modify Information</button>
+    </div>
+      </form>
+  </div>
+</body>
+{% endblock %}

@@ -1,0 +1,437 @@
+{% if logged == False %}
+	{% extends 'basetopnav.html' %}
+{% else %}
+	{% extends 'topnav.html' %}
+{% endif %}
+{% block body %}
+<head>
+	<meta charset="utf-8">
+	<title>Fire Categories | Quiet Corner Alerts</title>
+</head>
+	<style>
+.accordion {
+    background-color: #82a0bc;
+    color: #FFF;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border-left: 0.5px solid #304D6D;
+    border-right: 0.5px solid #304D6D;
+    border-bottom: 0.5px solid #545E75;
+    border-top: 0.5px solid #304D6D;
+    text-align: center;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+    font-family: allerta;
+    font-style: normal;
+    font-weight: 400;
+}
+body p {
+    font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", Verdana, "sans-serif";
+    font-style: normal;
+    font-weight: 400;
+    text-align: center;
+    font-size: 18px;
+    color: #FFFFFF;
+    padding-top: 35px;
+}
+body h2 {
+    text-align: center;
+    font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, sans-serif;
+    font-size: 35px;
+    color: #FFFFFF;
+}
+
+.active, .accordion:hover {
+    background-color: #A7CCED;
+}
+.panel p {
+    color: #000000;
+    text-align: left;
+	font-family: allerta;
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+body {
+    background-color: #545E75;
+}
+    </style>
+<!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.--><script>var __adobewebfontsappname__="dreamweaver"</script><script src="http://use.edgefonts.net/allerta:n4:default;cuprum:n4:default;federant:n4:default.js" type="text/javascript"></script>
+
+<body>
+<p>Below are all of the fire categories used in the Quiet Corner Alerts system. All categories are listed with a description as well as guidance on updates and upgrades.</p>
+<!--Title is after accordion button and description is below panel div-->
+<button class="accordion">1 ALARM FIRE</button>
+<div class="panel">
+  <p>Use this category for any structure fire where an official 1st alarm has been requested. For working fires less than a 1st alarm use Minor Fire<br>
+
+Page Speed: Units on scene<br>
+
+Required Information: Street Address, Size up of structure, entrapment<br>
+
+Update Criteria: Additional alarms, major changes(ie defensive ops, evac tones, collapses, entrapment/rescues<br>
+
+Example:<br>
+</p>
+</div>
+
+	<button class="accordion">MULTI ALARM FIRE</button>
+<div class="panel">
+  <p>Use this category for any structure fire where an official alarm level over a 1st alarm has been requested.<br>
+
+Page Speed: Units on scene<br>
+
+Required Information: Street Address, Size up of structure, entrapment<br>
+
+Update Criteria: Additional alarms, major changes(ie defensive ops, evac tones, collapses, entrapment/rescues<br>
+
+Example:<br>
+</p>
+</div>
+
+<button class="accordion">AIRCRAFT INCIDENT</button>
+<div class="panel">
+  <p>Description<br>
+
+Page Speed: Time of Call<br>
+
+Required Information:<br>
+
+Update Criteria:<br>
+
+Example:<br>
+</p>
+</div>
+
+<button class="accordion">ALARM ACTIVATION</button>
+<div class="panel">
+  <p>Use this category for any Fire or Carbon Monoxide alarm activation. This category may be paged at Time of Call. If Carbon Monoxide or active fire are present prioritize the propper fire category or hazmat respectively.<br>
+
+
+Page Speed: Time of Call<br>
+
+
+Required Information: Street Address, Type of Alarm, level of response<br>
+
+
+Update Criteria: If Carbon Monoxide or active fire are present page proper fire category or hazmat respectively.<br>
+
+
+Example:<br>
+</p>
+	</div>
+	
+	<button class="accordion">BRUSH FIRE</button>
+<div class="panel">
+  <p>Use this category for any brush fire.<br>
+
+
+Page Speed: Units on scene<br>
+
+
+Required Information:Cross street, size, rate of spread(if avalable), type of fuel(if available), exposures at risk(if any), level of response<br>
+
+
+Update Criteria:Location Change, +1 Acre size update, +2 Department Response, +5 Individual unit response, 1 or more special unit response(Drone, state resources, task forces, utvs, helecopter)<br>
+
+
+Example:<br>
+</p>
+</div>
+
+<button class="accordion">EXPLOSION</button>
+<div class="panel">
+  <p>Description<br>
+
+
+Page Speed: Units on scene/Time of Call<br>
+
+
+Required Information:<br>
+
+
+Update Criteria:<br>
+
+
+Example:<br>
+
+</p>
+</div>
+
+	<button class="accordion">HAZMAT</button>
+<div class="panel">
+  <p>Use this category for any hazardous material spill or confirmed gas leak or reading. This could be in a structure, from a vehicle, or any other source<br>
+
+
+Page Speed: Units on scene<br>
+
+
+Required Information:street address(cross street acceptable if large scale incident), material spilled, amount, type of container spilled from, level of response, injuries<br>
+
+
+Update Criteria: Evacuations/ road closures, deep/task force response, unkown materials identified, injuries<br>
+
+
+Example:<br>
+</p>
+</div>
+
+	<button class="accordion">INDOOR FIRE</button>
+<div class="panel">
+  <p>Any fire any fire inside of a structure that is not an official 1st alarm. Chimney fire, electrical fire, stove/kitchen fire<br>
+
+
+Page Speed: Units on scene<br>
+
+
+Required Information:<br>
+
+
+Update Criteria:<br>
+
+
+Example:<br>
+</p>
+</div>
+
+	<button class="accordion">INDUSTRIAL ACCIDENT</button>
+<div class="panel">
+  <p>This category is for any sort of industrial injury or entrapment. This could be in a factory, farm, or other location using large machines or heavy equipment.<br>
+
+
+Page Speed: Units on scene<br>
+
+
+Required Information:Street Address(and business if available), type of injury, cause(ie dumptruck, stuck in machinery), level of response<br>
+
+
+Update Criteria: upgrade to level of response, fatality, special resources requested<br>
+
+
+Example:<br>
+</p>
+</div>
+	
+	<button class="accordion">INJURED PERSON</button>
+<div class="panel">
+  <p>Hunting incident, misc major injuries<br>
+
+
+Page Speed: Units on scene/Time of Call<br>
+
+
+Required Information:<br>
+
+
+Update Criteria:<br>
+
+
+Example:<br>
+</p>
+</div>
+	
+	<button class="accordion">OUTSIDE FIRE</button>
+<div class="panel">
+  <p>Debris fire, outbuilding fire below 1st alarm, fires with extension to outside of a structure(siding/porch fire)<br>
+
+
+Page Speed: Units on scene<br>
+
+
+Required Information:<br>
+
+
+Update Criteria:<br>
+
+
+Example:<br>
+</p>
+</div>
+	
+	<button class="accordion">SEARCH AND RESCUE</button>
+<div class="panel">
+  <p>Any search and rescue mission where the location of the patient is not know<br>
+
+
+Page Speed: Time of Call<br>
+
+
+Required Information:<br>
+
+
+Update Criteria:<br>
+
+
+Example:<br>
+</p>
+</div>
+	
+	<button class="accordion">SERIOUS VEHICLE ACCIDENT</button>
+<div class="panel">
+  <p>Mva w/ ALS injuries, mva w/ entrapment, mva w/ medevac, rollover, ejection, Motorcycle down<br>
+
+
+Page Speed: Units on scene<br>
+
+
+Required Information:<br>
+
+
+Update Criteria:<br>
+
+
+Example:<br>
+</p>
+</div>
+	
+	<button class="accordion">TECHNICAL RESCUE</button>
+<div class="panel">
+  <p>Elevator entrapment, high angle rescue, animal rescue, any search and rescue call where the patients location is known(ex. hiker injured on the blue trail needing extrication)<br>
+
+
+Page Speed: Units on scene<br>
+
+
+Required Information:<br>
+
+
+Update Criteria:<br>
+
+
+Example:<br>
+</p>
+</div>
+	
+		<button class="accordion">TREE/WIRES DOWN</button>
+<div class="panel">
+  <p>Any tree or wire down in the roadway<br>
+
+
+Page Speed: Time of Call<br>
+
+
+Required Information:<br>
+
+
+Update Criteria: If unfounded, when roadway is cleared<br>
+
+
+Example:<br>
+</p>
+</div>
+	
+	<button class="accordion">VEHICLE ACCIDENT</button>
+<div class="panel">
+  <p>non-injury mva, mva w/ bls injury, ATV incident(if ALS upgrade to serious<br>
+
+
+Page Speed: Units on scene<br>
+
+
+Required Information:<br>
+
+
+Update Criteria:<br>
+
+
+Example:<br>
+</p>
+</div>
+	
+	<button class="accordion">VEHICLE FIRE</button>
+<div class="panel">
+  <p>Any vehicle fire<br>
+
+
+Page Speed: Units on scene<br>
+
+
+Required Information:<br>
+
+
+Update Criteria:<br>
+
+
+Example:<br>
+</p>
+</div>
+	
+	<button class="accordion">WATER PROBLEM</button>
+<div class="panel">
+  <p>Flooding, water main break, pipe burst, basement pump<br>
+
+
+Page Speed: Units on scene<br>
+
+
+Required Information:<br>
+
+
+Update Criteria:<br>
+
+
+Example:<br>
+</p>
+</div>
+	
+	<button class="accordion">WATER/ICE RESCUE</button>
+<div class="panel">
+  <p>Any water or ice rescue<br>
+
+
+Page Speed: Units on scene<br>
+
+
+Required Information:<br>
+
+
+Update Criteria:<br>
+
+
+Example:<br>
+</p>
+</div>
+	
+	<button class="accordion">WIRE/TRANSFORMER FIRE</button>
+<div class="panel">
+  <p>Any wire or transformer fire<br>
+
+
+Page Speed: Units on scene<br>
+
+
+Required Information:<br>
+
+
+Update Criteria:<br>
+
+
+Example:<br>
+</p>
+</div>
+	
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+</body>
+{% endblock %}

@@ -1,0 +1,18 @@
+<html>
+	<head>
+		<title>Reset Password</title>
+	</head>
+	<body>
+		<form action="{{url_for('auth.resetPassword')}}" method="post">
+			<div class="container">
+				<input type="hidden" name="resetToken" id="resetToken" value="{{token}}" />
+				<p>{{token}}</p>
+				<label for="pass1">New Password</label>
+				<input type="password" placeholder="Enter New Password" name="pass1" id="pass1" required />
+				<label for="pass2">Confirm Password</label>
+				<input type="password" placeholder="Enter Password Again" name="pass2" id="pass2" required />
+				<button type="submit">Reset Password</button>
+			</div>
+		</form>
+	</body>
+</html>

@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<title>Forgot Password</title>
+	</head>
+	<body>
+<script type="text/javascript" src="https://quietcorneralerts.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e-T/-dtzt95/b/6/c95134bc67d3a521bb3f4331beb9b804/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?jsI18nTransformer=migrated&locale=en-US&collectorId=98c84bfd"></script>
+
+		{% if finished %}
+		<p>Please check your email and follow the link to reset your password.</p>
+		{% else %}
+		<form action="{{url_for('auth.forgotPassword')}}" method="post">
+			<div class="container">
+				<label for="email">Email</label>
+				<input type="email" placeholder="Enter Email" name="email" id="email" required />
+				<button type="submit">Send Password Reset Email</button>
+			</div>
+		</form>
+		{% endif %}
+
+	</body>
+</html>

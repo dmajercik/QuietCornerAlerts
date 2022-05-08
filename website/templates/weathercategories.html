@@ -1,0 +1,251 @@
+{% if logged == False %}
+	{% extends 'basetopnav.html' %}
+{% else %}
+	{% extends 'topnav.html' %}
+{% endif %}
+{% block body %}
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="">
+<meta name="author" content="Daniel Majercik">
+<meta name="description" content="">
+<title>Weather Categories | Quiet Corner Alerts</title>
+</head>
+	<style>
+.accordion {
+    background-color: #82a0bc;
+    color: #FFF;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border-left: 0.5px solid #304D6D;
+    border-right: 0.5px solid #304D6D;
+    border-bottom: 0.5px solid #545E75;
+    border-top: 0.5px solid #304D6D;
+    text-align: center;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+    font-family: allerta;
+    font-style: normal;
+    font-weight: 400;
+}
+body p {
+    font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", Verdana, "sans-serif";
+    font-style: normal;
+    font-weight: 400;
+    text-align: center;
+    font-size: 18px;
+    color: #FFFFFF;
+    padding-top: 35px;
+}
+body h2 {
+    text-align: center;
+    font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, sans-serif;
+    font-size: 35px;
+    color: #FFFFFF;
+}
+
+.active, .accordion:hover {
+    background-color: #A7CCED;
+}
+.panel p {
+    color: #000000;
+    text-align: left;
+	font-family: allerta;
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+body {
+    background-color: #545E75;
+}
+    </style>
+<!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.-->
+<script>var __adobewebfontsappname__="dreamweaver"</script><script src="http://use.edgefonts.net/allerta:n4:default;cuprum:n4:default;federant:n4:default.js" type="text/javascript"></script>
+
+<body>
+<div class="categories">
+<h2>Below are all of the weather categories used in the Quiet Corner Alerts system. All categories are listed with a description as well as guidance on updates and upgrades.</h2>
+	<button class="accordion">REPORTED WEATHER EVENT</button>
+		<div class="panel">
+			<p>Description: Any active weather event causing damage to persons or property</p>
+			<p>Page Speed: Immediately after witnessed first hand or multiple verifiable sources are obtained</p>
+			<p>Required Information: Event | Location | Damage</p>
+			<p>Update Criteria: N/A</p>
+			<p>Example: Lightning Strike, Tornado Damage</p>
+		</div>
+		<div class="panel">
+			<p>Description: High degree of confidence that dry fuels and weather conditions support extreme fire danger within 24 hours using the following criteria as a guide:
+			<br>
+			Winds sustained or with frequent gusts ≥ 25 mph
+			<br>
+			Relative Humidity at or below 30% anytime during the day
+			<br>
+			Rainfall amounts for the previous 5 days less than 0.25 inches (except 3 days in pre-greenup)
+			<br>
+			Lightning after an extended dry period
+			<br>
+			Significant dry frontal passage
+			<br>
+			Dry thunderstorms
+			<br>
+			Keetch-Byram Drought Index values of 300 or greater (summer only)</p>
+			<p>Page Speed: Upon issue by National Weather Service</p>
+			<p>Required Information: Full NWS message</p>
+			<p>Update Criteria: Update upon new official message issuance</p>
+			<p>Example:</p>
+		</div>
+	<button class="accordion">HIGH WIND WARNING</button>
+		<div class="panel">
+			<p>Description: Sustained winds ≥ 40 mph (≥ 35 kts) for at least 1 hour; OR any gusts ≥ 58 mph (≥ 50 kts)</p>
+			<p>Page Speed: Upon issue by National Weather Service</p>
+			<p>Required Information: Full NWS message</p>
+			<p>Update Criteria: Update upon new official message issuance</p>
+		</div>
+	<button class="accordion">EXTREME WIND WARNING</button>
+		<div class="panel">
+			<p>Description: Short-fused warning for onset of extreme winds, defined as sustained at 111+ mph (equivalent to a Category 3+ hurricane). This is typically used for the approach of the eyewall of a major landfalling hurricane.</p>
+			<p>Page Speed: Upon issue by National Weather Service</p>
+			<p>Required Information: Full NWS message</p>
+			<p>Update Criteria: Update upon new official message issuance</p>
+		</div>
+	<button class="accordion">Wind Advisory</button>
+		<div class="panel">
+			<p>Description: Sustained winds 31-39 mph (27-34 kts) for at least 1 hour; OR any gusts to 46-57 mph (40-49 kts)</p>
+			<p>Page Speed: Upon issue by National Weather Service</p>
+			<p>Required Information: Full NWS message</p>
+			<p>Update Criteria: Update upon new official message issuance</p>
+		</div>
+	<button class="accordion">SEVERE THUNDERSTORM WARNING</button>
+		<div class="panel">
+			<p>Description: Thunderstorms with wind gusts ≥ 58 mph (50 kts) and/or hail ≥ 1-inch in diameter and/or a tornado. </p>
+			<p>Page Speed: Upon issue by National Weather Service</p>
+			<p>Required Information: Full NWS message</p>
+			<p>Update Criteria: Update upon new official message issuance</p>
+		</div>
+	<button class="accordion">TORNADO WARNING</button>
+		<div class="panel">
+			<p>Description: Likelihood of a tornado within the given area based on radar or actual sighting; usually accompanied by conditions indicated above for "Severe Thunderstorm Warning".</p>
+			<p>Page Speed: Upon issue by National Weather Service</p>
+			<p>Required Information: Full NWS message</p>
+			<p>Update Criteria: Update upon new official message issuance</p>
+		</div>
+	<button class="accordion">FLOOD ADVISORY</button>
+		<div class="panel">
+			<p>Description: Expected inundation by water of some low lying and poor drainage areas, resulting in a nuisance to the public but not a threat to life and property.</p>
+			<p>Page Speed: Upon issue by National Weather Service</p>
+			<p>Required Information: Full NWS message</p>
+			<p>Update Criteria: Update upon new official message issuance</p>
+		</div>
+	<button class="accordion">FLASH FLOOD WATCH</button>
+		<div class="panel">
+			<p>Description: Expected overflow or inundation by water which causes or will cause damage and/or a threat to life.</p>
+			<p>Page Speed: Upon issue by National Weather Service</p>
+			<p>Required Information: Full NWS message</p>
+			<p>Update Criteria: Update upon new official message issuance</p>
+		</div>
+	<button class="accordion">FLASH FLOOD WARNING</button>
+		<div class="panel">
+			<p>Description: Rapid and extreme flow of high water into a normally dry area, or a rapid water level rise in a stream or creek above a predetermined flood level, beginning within a short timeframe from the onset of heavy rain.</p>
+			<p>Page Speed: Upon issue by National Weather Service</p>
+			<p>Required Information: Full NWS message</p>
+			<p>Update Criteria: Update upon new official message issuance</p>
+		</div>
+	<button class="accordion">RIVER FLOOD WARNING</button>
+		<div class="panel">
+			<p>Description: Water level at a River Forecast point along a main stem river (such as the Merrimack, Nashua or Charles) is expected to reach or exceed flood stage.</p>
+			<p>Page Speed: Upon issue by National Weather Service</p>
+			<p>Required Information: Full NWS message</p>
+			<p>Update Criteria: Update upon new official message issuance</p>
+		</div>
+	<button class="accordion">TROPICAL STORM WARNING</button>
+		<div class="panel">
+			<p>Description: Sustained winds 39-73 mph (34-63 kts) (no gust criteria) associated with a tropical storm expected to affect a coastal or inland zone within 36 hours.</p>
+			<p>Page Speed: Upon issue by National Weather Service</p>
+			<p>Required Information: Full NWS message</p>
+			<p>Update Criteria: Update upon new official message issuance</p>
+		</div>
+	<button class="accordion">HURRICANE WARNING</button>
+		<div class="panel">
+			<p>Description: Sustained winds ≥ 74 mph (≥ 64 kts) (no gust criteria) associated with a hurricane expected to affect a coastal or inland zone within 36 hours.</p>
+			<p>Page Speed: Upon issue by National Weather Service</p>
+			<p>Required Information: Full NWS message</p>
+			<p>Update Criteria: Update upon new official message issuance</p>
+		</div>
+	<button class="accordion">WINTER STORM WATCH</button>
+		<div class="panel">
+			<p>Description: When any of the following is expected within the next 12 to 36 hours
+			<br>
+			More than one predominant hazard: Winter weather event having more than one predominant hazard {ie. heavy snow and blowing snow (below blizzard conditions), snow and ice, snow and sleet, sleet and ice, or snow, sleet and ice} meeting or exceeding warning criteria for at least one of the precipitation elements.
+			<br>
+			Snow, Ocean Effect Snow, or Sleet:
+			<br>
+			6 inches averaged over a forecast zone in a 12 hour period
+			<br>
+			8 inches averaged over a CT, MA, RI forecast zone in a 24 hour period</p>
+			<p>Page Speed: Upon issue by National Weather Service</p>
+			<p>Required Information: Full NWS message</p>
+			<p>Update Criteria: Update upon new official message issuance</p>
+		</div>
+	<button class="accordion">WINTER WEATHER ADVISORY</button>
+		<div class="panel">
+			<p>Description: When any of the following is expected within the next 12 to 24 hours
+			<br>
+			More than one predominant hazard
+			<br>
+			Winter weather event having more than one predominant hazard (i.e., snow and ice, snow and sleet, or snow, ice & sleet) meeting or exceeding advisory criteria for at least one of the precipitation elements, but remaining below warning criteria.
+			<br>
+			Snow, Ocean Effect Snow, and/or Sleet: 3 inches averaged over a CT, MA, RI forecast zone in 12 hours
+			<br>
+			Snow and Blowing Snow: Sustained or frequent gusts of 25 to 34 mph accompanied by falling and blowing snow occasionally reducing visibility to ≤ ¼ mi for < 3 hours
+			<br>
+			lowing Snow: Widespread or localized blowing snow reducing visibility to ≤ ¼ mi with winds < 35 mph
+			<br>
+			Freezing Rain: Any accretion of freezing rain or freezing drizzle on road surfaces.
+			<br>
+			Black Ice: A Special Weather Statement will usually be issued when sufficient moisture is expected to cause a thin layer of ice on road surfaces, typically on cloudless nights ("black ice"). At forecaster discretion a formal Winter Weather Advisory may be issued instead.</p>
+			<p>Page Speed: Upon issue by National Weather Service</p>
+			<p>Required Information: Full NWS message</p>
+			<p>Update Criteria: Update upon new official message issuance</p>
+		</div>
+	<button class="accordion">BLIZZARD WARNING</button>
+		<div class="panel">
+			<p>Description: Sustained winds or frequent gusts ≥ 35 mph AND considerable falling and/or blowing snow frequently reducing visibility < ¼ for ≥ 3 hours.
+			Blizzard conditions need to be the predominant condition over a 3 hour period.</p>
+			<p>Page Speed: Upon issue by National Weather Service</p>
+			<p>Required Information: Full NWS message</p>
+			<p>Update Criteria: Update upon new official message issuance</p>
+		</div>
+	<button class="accordion">ICE STORM WARNING</button>
+		<div class="panel">
+			<p>Description: ½ inch or greater accretion of freezing rain in any zone. </p>
+			<p>Page Speed: Upon issue by National Weather Service</p>
+			<p>Required Information: Full NWS message</p>
+			<p>Update Criteria: Update upon new official message issuance</p>
+		</div>
+</div>
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+</body>
+{% endblock %}

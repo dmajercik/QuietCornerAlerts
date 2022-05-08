@@ -1,0 +1,175 @@
+{% extends 'basetopnav.html' %}
+{% block header %}
+<!doctype html>
+<html>
+	<!--W3 Schools assisted Coding-->
+<head>
+<meta charset="utf-8">
+<meta name="keywords" content="">
+<meta name="author" content="Daniel Majercik">
+<meta name="description" content="">
+<title>Dispatch | Quiet Corner Alerts</title>
+</head>
+{% endblock header%}
+{% block body %}
+<style>
+* {
+  box-sizing: border-box;
+}
+body{
+ background-color:#545E78;
+}
+
+.row {
+  margin-left:-5px;
+  margin-right:-5px;
+}
+
+.column1 {
+  float: left;
+  width: 70%;
+  padding: 5px;
+  overflow: auto;
+}
+.column2 {
+  float: right;
+  width: 30%;
+  padding: 5px;
+  margin-top: 10px;
+  text-align: left;
+  border: 1px solid white;
+}
+.chatbox{
+overflow: auto;
+  height:75vh;
+  text-alight: left;
+}
+.quetable{
+overflow: auto;
+  height:25vh;
+}
+.twentyfourhrtable{
+overflow: auto;
+  height:45vh;
+}
+
+/* Clearfix (clear floats) */
+.row:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 2px solid white;
+}
+
+table, th, td {
+  text-align: center;
+  padding: 16px;
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+
+tr:nth-child(even) {
+  background-color: #7E95B1;
+}
+
+div{
+    font-size: 12px;
+    color: #FFFFFF;
+    font-family: allerta;
+    font-style: normal;
+    font-weight: 400;
+    }
+h2 {
+    text-align: center;
+}
+p{
+    text-align: center;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    window.onload = setupChat;
+
+    function setupRefresh()
+    {
+        setInterval("refreshBlock();",15000);
+    }
+
+    function setupChat()
+    {
+        setInterval("refreshChat();",5000);
+
+    }
+    function refreshBlock()
+    {
+       $('#incidenttables').load("/dispatch #incidenttables");
+    }
+
+    function refreshChat()
+    {
+       $('#incidenttables').load("/dispatch #incidenttables");
+    }
+  </script>
+<body>
+
+<div class="row">
+    <div class="column1">
+        <h2>Incident Que </h2>
+        <div id="incidenttables">
+            <div class="quetable">
+                <table class="table table-hover table-dark">
+                    <tr>
+                            <th>Dispatcher</th>
+                           <th>Date</th>
+                           <th>Time</th>
+                           <th>Town</th>
+                           <th>State</th>
+                           <th>Incident Type</th>
+                       </tr>
+                        {% for row in que_data %}
+                        <tr>
+                            <td>{{row[8]}}</td>
+                            <td>{{row[1]}}</td>
+                            <td>{{row[2]}}</td>
+                            <td>{{row[3]}}</td>
+                            <td>{{row[4]}}</td>
+                            <td>{{row[6]}}</td>
+                        </tr>
+                        {% endfor %}
+                </table>
+            </div>
+            <br>
+            <h2>Past 24hr Incidents</h2>
+            <div class="twentyfourhrtable">
+                <table class="table table-hover table-dark">
+                   <tr>
+                       <th>Dispatcher</th>
+                       <th>Date</th>
+                       <th>Time</th>
+                       <th>Town</th>
+                       <th>State</th>
+                       <th>Incident Type</th>
+                   </tr>
+                    {% for row in twentyfourhour_data %}
+                    <tr>
+                        <td>{{row[8]}}</td>
+                        <td>{{row[1]}}</td>
+                        <td>{{row[2]}}</td>
+                        <td>{{row[3]}}</td>
+                        <td>{{row[4]}}</td>
+                        <td>{{row[6]}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+{% endblock %}

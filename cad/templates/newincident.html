@@ -1,0 +1,222 @@
+{% extends 'topnav.html' %}
+{% block body %}
+<style>
+body {
+    font-family: allerta;
+    background-color: #545E75;
+    color: #FFFFFF;
+}
+* {box-sizing: border-box}
+
+
+input[type=option], input[type=password], input[type=text], input[type=tel] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=tel]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+</style>
+<meta http-equiv="refresh" content="600">
+	<head>
+		<meta charset="UTF-8" />
+		<title>New Incident</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col md-12">
+					<div class="jumbotron p-3">
+						<h2>Create New Incident</h2>
+						<form action="{{url_for('cad.newincident')}}" method="POST">
+							<div class="form-group">
+								<label>Incident Type*</label>
+								<select class="form-control" name="incident" required="1">
+									<optgroup label="FIRE INCIDENTS">
+									<option value="TEST INCIDENT">TEST INCIDENT</option>
+									<option value="1 ALARM FIRE">1 ALARM FIRE</option>
+									<option value="ALARM UPGRADE">ALARM UPGRADE</option>
+									<option value="MULTI ALARM FIRE">MULTI ALARM FIRE</option>
+									<option value="AIRCRAFT INCIDENT">AIRCRAFT INCIDENT</option>
+									<option value="ALARM ACTIVATION">ALARM ACTIVATION</option>
+									<option value="BRUSH FIRE">BRUSH FIRE</option>
+									<option value="EXPLOSION">EXPLOSION</option>
+									<option value="HAZMAT">HAZMAT</option>
+									<option value="INDUSTRIAL ACCIDENT">
+										INDUSTRIAL ACCIDENT
+									</option>
+									<option value="INSIDE FIRE">INSIDE FIRE</option>
+									<option value="INJURED PERSON">INJURED PERSON</option>
+									<option value="OUTSIDE FIRE">OUTSIDE FIRE</option>
+									<option value="SEARCH AND RESCUE">SEARCH AND RESCUE</option>
+									<option value="SERIOUS VEHICLE ACCIDENT">
+										SERIOUS VEHICLE ACCIDENT
+									</option>
+									<option value="TECHNICAL RESCUE">TECHNICAL RESCUE</option>
+									<option value="TREE/WIRES DOWN">TREE/WIRES DOWN</option>
+									<option value="VEHICLE ACCIDENT">VEHICLE ACCIDENT</option>
+									<option value="VEHICLE FIRE">VEHICLE FIRE</option>
+									<option value="WATER PROBLEM">WATER PROBLEM</option>
+									<option value="WATER/ICE RESCUE">WATER/ICE RESCUE</option>
+									<option value="WIRE/TRANSFORMER FIRE">
+										WIRE/TRANSFORMER FIRE
+									</option>
+									</optgroup>
+									<optgroup label="POLICE INCIDENTS">
+									<option value="BOLO">BOLO</option>
+									<option value="BOMB THREAT">BOMB THREAT</option>
+									<option value="BURGLARY">BURGLARY</option>
+									<option value="MISSING PERSON">MISSING PERSON</option>
+									<option value="POLICE ACTIVITY">POLICE ACTIVITY</option>
+									<option value="PROTEST">PROTEST</option>
+									<option value="ROBBERY">ROBBERY</option>
+									<option value="SPECIAL TEAM ACTIVATION">SPECIAL TEAM ACTIVATION</option>
+									<option value="STABBING/SHOOTING">STABBING/SHOOTING</option>
+									<option value="UNEXPLODED ORDINANCE">UNEXPLODED ORDINANCE</option>
+									<option value="VEHICLE/SUSPECT PURSUIT">VEHICLE/SUSPECT PURSUIT</option>
+									</optgroup>
+									<optgroup label="WEATHER ALERTS">
+									<option value="REPORTED WEATHER EVENT">REPORTED WEATHER EVENT</option>
+									<option value="SPECIAL WEATHER STATEMENT">SPECIAL WEATHER STATEMENT</option>
+									<optgroup label="FIRE WEATHER ALERTS">
+									<option value="RED FLAG WARNING">RED FLAG WARNING</option>
+									</optgroup>
+									<optgroup label="WIND WEATHER ALERTS">
+									<option value="HIGH WIND WARNING">HIGH WIND WARNING</option>
+									<option value="EXTREME WIND WARNING">EXTREME WIND WARNING</option>
+									<option value="WIND ADVISORY">WIND ADVISORY</option>
+									<option value="SEVERE THUNDERSTORM WARNING">SEVERE THUNDERSTORM WARNING</option>
+									<option value="TORNADO WARNING">TORNADO WARNING</option>
+									<option value="FLOOD ADVISORY">FLOOD ADVISORY</option>
+									<option value="FLOOD WATCH">FLOOD WATCH</option>
+									<option value="FLASH FLOOD WATCH">FLASH FLOOD WATCH</option>
+									<option value="FLASH FLOOD WARNING">FLASH FLOOD WARNING</option>
+									<option value="RIVER FLOOD WARNING">RIVER FLOOD WARNING</option>
+									<option value="TROPICAL STORM WARNING">TROPICAL STORM WARNING</option>
+									<option value="HURRICANE WARNING">HURRICANE WARNING</option>
+									</optgroup>
+									<optgroup label="WINTER WEATHER ALERTS">
+									<option value="WINTER STORM WATCH">WINTER STORM WATCH</option>
+									<option value="WINTER STORM ADVISORY">WINTER STORM ADVISORY</option>
+									<option value="WINTER STORM WARNING">WINTER STORM WARNING</option>
+									<option value="BLIZZARD WARNING">BLIZZARD WARNING</option>
+									<option value="ICE STORM WARNING">ICE STORM WARNING</option>
+									</optgroup>
+									</optgroup>
+								</select>
+							</div>
+
+							<div class="form-group">
+								<label>State*</label>
+								<select class="form-control" name="state" required="1">
+									<option value=""></option>
+									<option value="CT">CT</option>
+									<option value="MA">MA</option>
+									<option value="RI">RI</option>
+									<option value=""></option>
+									<option value="AK">AK</option>
+									<option value="AZ">AZ</option>
+									<option value="AR">AR</option>
+									<option value="AK">AK</option>
+									<option value="CA">CA</option>
+									<option value="CO">CO</option>
+									<option value="DE">DE</option>
+									<option value="DC">DC</option>
+									<option value="FL">FL</option>
+									<option value="GA">GA</option>
+									<option value="GU">GU</option>
+									<option value="HI">HI</option>
+									<option value="ID">ID</option>
+									<option value="IL">IL</option>
+									<option value="IN">IN</option>
+									<option value="IA">IA</option>
+									<option value="KS">KS</option>
+									<option value="KY">KY</option>
+									<option value="LA">LA</option>
+									<option value="ME">ME</option>
+									<option value="MD">MD</option>
+									<option value="MI">MI</option>
+									<option value="MS">MS</option>
+									<option value="MO">MO</option>
+									<option value="MT">MT</option>
+									<option value="NE">NE</option>
+									<option value="NV">NV</option>
+									<option value="NH">NH</option>
+									<option value="NJ">NJ</option>
+									<option value="NM">NM</option>
+									<option value="NY">NY</option>
+									<option value="NC">NC</option>
+									<option value="ND">ND</option>
+									<option value="OH">OH</option>
+									<option value="OK">OK</option>
+									<option value="OR">OR</option>
+									<option value="PA">PA</option>
+									<option value="PR">PR</option>
+									<option value="SC">SC</option>
+									<option value="SD">SD</option>
+									<option value="TN">TN</option>
+									<option value="TX">TX</option>
+									<option value="UT">UT</option>
+									<option value="VT">VT</option>
+									<option value="VA">VA</option>
+									<option value="WA">WA</option>
+									<option value="WV">WV</option>
+									<option value="WI">WI</option>
+									<option value="WY">WY</option>
+								</select>
+							</div>
+
+							<div class="form-group">
+								<label>Town*</label>
+								<input
+									type="text"
+									class="form-control"
+									name="town"
+									required="1"
+								/>
+							</div>
+
+							<div class="form-group">
+								<label>Road*<small>Only use an address or cross streets. Do not use "area of"</small></label>
+								<input
+									type="text"
+									class="form-control"
+									name="roadname"
+									required="1"
+								/>
+							</div>
+
+							<div class="form-group">
+								<label>Narrative* </label><small>The narrative needs to be more than 20 character / 3 words and must follow the "Units o/s" or "Units responding" format</small>
+								<input
+									type="text"
+									class="form-control"
+									name="narrative"
+									required="1"
+									minlength="20"
+									maxlength="250"
+								/>
+							</div>
+
+							<div class="form-group">
+								<button class="btn btn-primary" type="submit">
+									Add Incident
+								</button>
+								<button class="btn btn-primary" type="reset">Reset</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<form action="/dispatch">
+			<input type="submit" value="Return to Dispatch" />
+		</form>
+	</body>
+{% endblock %}

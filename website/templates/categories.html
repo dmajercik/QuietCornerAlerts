@@ -1,0 +1,156 @@
+{% if logged == False %}
+	{% extends 'basetopnav.html' %}
+{% else %}
+	{% extends 'topnav.html' %}
+{% endif %}
+{% block body %}
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="">
+<meta name="author" content="Daniel Majercik">
+<meta name="description" content="">
+<title>Categories | Quiet Corner Alerts</title>
+</head>
+
+<style>
+
+.accordion {
+    background-color: #82a0bc;
+    color: #FFF;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border-left: 0.5px solid #304D6D;
+    border-right: 0.5px solid #304D6D;
+    border-bottom: 0.5px solid #545E75;
+    border-top: 0.5px solid #304D6D;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+    font-family: allerta;
+    font-style: normal;
+    font-weight: 400;
+}
+body p {
+    font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", Verdana, "sans-serif";
+    font-style: normal;
+    font-weight: 400;
+    text-align: center;
+    font-size: 18px;
+    color: #FFFFFF;
+    padding-top: 35px;
+}
+body h2 {
+    text-align: center;
+    font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, sans-serif;
+    font-size: 35px;
+    color: #FFFFFF;
+}
+
+.active, .accordion:hover {
+    background-color: #A7CCED;
+}
+.panel p {
+    color: #000000;
+    text-align: left;
+	font-family: allerta;
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+body {
+    background-color: #545E75;
+}
+
+	/* Dropdown Button */
+.dropbtn {
+    background-color: #82A0BC;
+    color: white;
+    padding: 16px;
+    font-size: 27px;
+    border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+     position: relative;
+    display:inline-flex;
+    justify-content: center;
+    font-family: cuprum;
+    font-style: normal;
+    font-weight: 400;
+    color: #FFFFFF;
+	left: 44%
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    top: 60px;
+    color: #FFFFFF;
+    font-family: allerta;
+    font-style: normal;
+    font-weight: 400;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: #FFFFFF;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+    background-color: #6C8DAD;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: #A7CCED;
+}
+
+		body footer {
+    color: #FFFFFF;
+    font-family: allerta;
+    font-style: normal;
+    font-weight: 400;
+	position: static;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+}
+</style>
+<!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.--><script>var __adobewebfontsappname__="dreamweaver"</script><script src="http://use.edgefonts.net/cuprum:n4:default;federant:n4:default;allerta:n4:default.js" type="text/javascript"></script>
+<body>
+	<p>Use the button below to select which category you wish to view.</p>
+
+<div class="dropdown">
+<button class="dropbtn">Categories</button>
+		<div class="dropdown-content">
+		<a href="/firecategories">Fire Categories</a>
+		<a href="/policecategories">Police Categories</a>
+		<a href="/medicalcategories">Medical Categories</a>
+		<a href="/weathercategories">Weather Categories</a>
+	</div>
+		</div>
+
+</body>
+{% endblock %}
