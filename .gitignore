@@ -1,0 +1,15 @@
+*.pyc
+__pycache__/*
+cad/time.py
+.idea/workspace.xml
+*.xml
+.idea
+.DS_Store
+*venv
+cad/test.py
+cad/templates/folium_map.html
+cad/folium_map.html
+*.idea
+*.config
+secret.config
+*.zip
