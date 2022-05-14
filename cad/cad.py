@@ -15,9 +15,10 @@ from folium.plugins import MarkerCluster
 from geopy.geocoders import Nominatim
 import os
 import configparser
+import json
 
 config = configparser.RawConfigParser()
-configFilePath = r'secret.config'
+configFilePath = [r'secret.config', r'QCA.config']
 config.read(configFilePath)
 
 geolocator = Nominatim(user_agent='Quiet Corner Alerts')
@@ -27,20 +28,32 @@ cad = Blueprint('cad', __name__, template_folder='templates')
 logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
 log = logging.getLogger("cad")
 
+#twitter keys and setup for @quietcorneralrt
 twitter_consumer_key = config.get('key','twitter_consumer_key')
 twitter_consumer_secret = config.get('key','twitter_consumer_secret')
 twitter_access_token = config.get('key','twitter_access_token')
 twitter_access_token_secret = config.get('key','twitter_access_secret')
-
 twitauth = tweepy.OAuth1UserHandler(twitter_consumer_key, twitter_consumer_secret)
 twitauth.set_access_token(twitter_access_token, twitter_access_token_secret)
 api = tweepy.API(twitauth)
 
+#twitter keys and setup for @QCA_National
+QCAnational_twitter_consumer_key = config.get('key','QCAnational_twitter_api_key')
+QCAnational_twitter_consumer_secret = config.get('key','QCAnational_twitter_api_secret')
+QCAnational_twitter_access_token = config.get('key','QCAnational_twitter_access_token')
+QCAnational_twitter_access_token_secret = config.get('key','QCAnational_twitter_access_secret')
+QCAnational_twitauth = tweepy.OAuth1UserHandler(QCAnational_twitter_consumer_key, QCAnational_twitter_consumer_secret)
+QCAnational_twitauth.set_access_token(QCAnational_twitter_access_token, QCAnational_twitter_access_token_secret)
+QCAnational_api = tweepy.API(QCAnational_twitauth)
+
+#facebook key and setup
 #this token expires on 9JUN22!!!
 facebook_token = config.get('key','facebook_token')
 graph = GraphAPI(access_token=facebook_token)
 facebook_page = config.get('key','facebook_page')
 
+
+#this needs to be redone at somepoint. Baseline times to account for TZ. This may not be needed in AWS
 def gettimes():
     global est, dt, current_time, current_date, current_date_time, date_time_minus_one_min, date_time_minus_twentyfour_hr
     est = timezone('US/Eastern')
@@ -316,13 +329,10 @@ def tweet1(id):
 
 def autotweet(id):
     tweet_data = []
-    tweetable_towns_ct = ['THOMPSON', 'WOODSTOCK', 'ASHFORD', 'EASTFORD', 'PUTNAM', 'KILLINGLY', 'POMFRET', 'BROOKLYN', 'HAMPTON', 'CHAPLIN', 'WINDHAM', 'SCOTLAND',
-                          'CANTERBURY', 'PLAINFIELD', 'STERLING', 'SPRAGUE', 'NORWICH', 'FRANKLIN', 'LISBON', 'VOLUNTOWN', 'GRISWOLD', 'BOZRAH', 'PRESTON', 'COLCHESTER',
-                          'SALEM', 'MONTVILLE', 'NORTH STONINGTON', 'UNION','STATE WIDE', 'STATEWIDE', 'WINDHAMN COUNTY', 'TOLLAND COUNTY', 'NEW LONDON COUNTY']
-    tweetable_towns_ma = ['WEBSTER', 'DOUGLAS', 'SUTTON', 'OXFORD', 'CHARLTON', 'DUDLEY', 'SOUTHBRIDGE', 'STURBRIDGE', 'CHARLTON', 'AUBURN', 'MILBURY', 'WORCESTER', 'STATE WIDE', 'STATEWIDE', 'WORCESTER COUNTY']
-    tweetable_towns_ri = ['BURRILLVILLE', 'GLOCESTER']
-    non_tweetable_incidents = ['TEST INCIDENT', 'BOLO', 'BOMB THREAT', 'BURGLARY', 'MISSING PERSON','POLICE ACTIVITY',
-                               'PROTEST', 'ROBBERY', 'SPECIAL TEAM ACTIVATION','STABBING/SHOOTING', 'UNEXPLODED ORDINANCE', 'VEHICLE/SUSPECT PURSUIT']
+    tweetable_towns_ct = json.loads(config.get('tweetable_towns','tweetable_towns_CT'))
+    tweetable_towns_ma = json.loads(config.get('tweetable_towns','tweetable_towns_MA'))
+    tweetable_towns_ri = json.loads(config.get('tweetable_towns','tweetable_towns_RI'))
+    non_tweetable_incidents = json.loads(config.get('non_tweetable_incidents','incidents'))
     tweet = Calls.objects.filter(id=id)
     for call in tweet:
         if call.updated == True:
@@ -476,6 +486,75 @@ def autotweet(id):
             else:
                 pass
 
+def national_autotweet(id):
+    tweet_data = []
+    non_tweetable_incidents = json.loads(config.get('non_tweetable_incidents','incidents'))
+    tweet = Calls.objects.filter(id=id)
+    for call in tweet:
+        if call.updated == True:
+            if call.incident not in non_tweetable_incidents:
+                if call.dispatcher == 'QCA001':
+                    tweet_data.append(
+                        'UPDATED INCIDENT | ' + call.town + ' | ' + call.state + ' | ' + call.roadname + ' | ' + call.incident + ' | ' + call.narrative)
+                    print('CT Tweet ', tweet_data)
+                    QCAnational_api.update_status(tweet_data[0])
+                    facebook_data = str(tweet_data[0] + ' | Updates at twitter.com/quietcorneralrt')
+                    #graph.put_object(facebook_page, 'feed', message=facebook_data)
+                else:
+                    try:
+                        tweet_data.append(
+                            'UPDATED INCIDENT | ' + call.town + ' | ' + call.state + ' | ' + call.roadname + ' | ' + call.incident + ' | ' + call.narrative + ' | PER ' + call.dispatcher_credit)
+                        print('CT Tweet ', tweet_data)
+                        QCAnational_apiapi.update_status(tweet_data[0])
+                        facebook_data = str(
+                            tweet_data[0] + ' | Updates at twitter.com/quietcorneralrt')
+                        #graph.put_object(facebook_page, 'feed', message=facebook_data)
+                    except:
+                        pass
+                    try:
+                        tweet_data.append('UPDATED INCIDENT | ' +
+                                          call.town.upper() + ' | ' + call.state.upper() + ' | ' + call.roadname + ' | ' + call.incident + ' | ' + call.narrative + ' | PER ' + 'QCA Dispatcher')
+                        print('CT Tweet ', tweet_data)
+                        QCAnational_api.update_status(tweet_data[0])
+                        facebook_data = str(
+                            tweet_data[0] + ' | Updates at twitter.com/quietcorneralrt')
+                        #graph.put_object(facebook_page, 'feed', message=facebook_data)
+                    except:
+                        pass
+            else:
+                pass
+        else:
+            if call.incident not in non_tweetable_incidents:
+                if call.dispatcher == 'QCA001':
+                    tweet_data.append(
+                        call.town + ' | ' + call.state + ' | ' + call.roadname + ' | ' + call.incident + ' | ' + call.narrative)
+                    print('CT Tweet ', tweet_data)
+                    QCAnational_api.update_status(tweet_data[0])
+                    facebook_data = str(tweet_data[0] + ' | Updates at twitter.com/quietcorneralrt')
+                    #graph.put_object(facebook_page, 'feed', message=facebook_data)
+                else:
+                    try:
+                        tweet_data.append(
+                            call.town + ' | ' + call.state + ' | ' + call.roadname + ' | ' + call.incident + ' | ' + call.narrative + ' | PER ' + call.dispatcher_credit)
+                        print('CT Tweet ', tweet_data)
+                        QCAnational_api.update_status(tweet_data[0])
+                        facebook_data = str(
+                            tweet_data[0] + ' | Updates at twitter.com/quietcorneralrt')
+                        #graph.put_object(facebook_page, 'feed', message=facebook_data)
+                    except:
+                        pass
+                    try:
+                        tweet_data.append(call.town.upper() + ' | ' + call.state.upper() + ' | ' + call.roadname + ' | ' + call.incident + ' | ' + call.narrative + ' | PER ' + 'QCA Dispatcher')
+                        print('CT Tweet ', tweet_data)
+                        QCAnational_api.update_status(tweet_data[0])
+                        facebook_data = str(
+                            tweet_data[0] + ' | Updates at twitter.com/quietcorneralrt')
+                        #graph.put_object(facebook_page, 'feed', message=facebook_data)
+                    except:
+                        pass
+            else:
+                pass
+
 @cad.route('/alert')
 def alert():
     tweet_data = []
@@ -502,6 +581,7 @@ def alert():
 def confirm(id):
     Calls.objects(id=id).update(active='True')
     autotweet(id=id)
+    national_autotweet(id=id)
     return redirect(url_for('cad.dispatch'))
 
 @cad.route('/delete/<id>')
@@ -738,3 +818,12 @@ def map():
         print(error)
         return redirect(url_for('cad.dispatch'))
 
+@cad.route('/testconfig')
+def testconfig():
+    tweetable_towns_ct = json.loads(config.get('tweetable_towns', 'tweetable_towns_CT'))
+    state = 'CT'
+    town = 'THOMPSON'
+    print(tweetable_towns_ct)
+    if state == 'CT' and town in tweetable_towns_ct:
+        print('yup')
+    return redirect(url_for('cad.dispatch'))

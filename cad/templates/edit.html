@@ -40,7 +40,7 @@ input[type=text]:focus, input[type=tel]:focus {
 						<form method="POST">
 							<div class="form-group">
 								<label>Incident Type*</label>
-								<select class="form-control" name="incident" required="1">
+								<select id="incident"class="form-control" name="incident" required="1">
 									<optgroup label="FIRE INCIDENTS">
 									<option value="TEST INCIDENT">TEST INCIDENT</option>
 									<option value="1 ALARM FIRE">1 ALARM FIRE</option>
@@ -117,7 +117,7 @@ input[type=text]:focus, input[type=tel]:focus {
 
 							<div class="form-group">
 								<label>State*</label>
-								<select class="form-control" name="state" required="1">
+								<select id="state" class="form-control" name="state" required="1">
 									<option value=""></option>
 									<option value="CT">CT</option>
 									<option value="MA">MA</option>
@@ -188,6 +188,7 @@ input[type=text]:focus, input[type=tel]:focus {
 							<div class="form-group">
 								<label>Town*</label>
 								<input
+                                    id="town"
 									type="text"
 									class="form-control"
 									name="town"
@@ -199,6 +200,7 @@ input[type=text]:focus, input[type=tel]:focus {
 							<div class="form-group">
 								<label>Road*</label>
 								<input
+                                    id="road"
 									type="text"
 									class="form-control"
 									name="roadname"
@@ -210,6 +212,7 @@ input[type=text]:focus, input[type=tel]:focus {
 							<div class="form-group">
 								<label>Narrative*</label>
 								<input
+                                    id="narrative"
 									type="text"
 									class="form-control"
 									name="narrative"
@@ -219,7 +222,9 @@ input[type=text]:focus, input[type=tel]:focus {
 									maxlength="250"
 								/>
 							</div>
-
+        <p>
+    <span id="wordCount">232</span> Characters Available
+        </p>
 							<div class="form-group">
 								<button class="btn btn-primary" type="submit">
 									Edit Incident
@@ -236,4 +241,52 @@ input[type=text]:focus, input[type=tel]:focus {
 			<input type="submit" value="Return to Dispatch" />
 		</form>
 	</body>
+       <script>
+    var incident = document.getElementById("incident");
+    var state = document.getElementById("state");
+    var town = document.getElementById("town");
+    var road = document.getElementById("road");
+    var narrative = document.getElementById("narrative");
+    var wordCount = document.getElementById("wordCount");
+    incident.addEventListener("click",function (){
+        var incidentCharacters = incident.value.split('');
+        var stateCharacters = state.value.split('');
+        var townCharacters = town.value.split('');
+        var roadCharacters = road.value.split('');
+        var narrativeCharacters = narrative.value.split('');
+        wordCount.innerText = 245-incidentCharacters.length-stateCharacters.length-townCharacters.length-roadCharacters.length-narrativeCharacters.length;
+    });
+    state.addEventListener("click",function (){
+        var incidentCharacters = incident.value.split('');
+        var stateCharacters = state.value.split('');
+        var townCharacters = town.value.split('');
+        var roadCharacters = road.value.split('');
+        var narrativeCharacters = narrative.value.split('');
+        wordCount.innerText = 245-incidentCharacters.length-stateCharacters.length-townCharacters.length-roadCharacters.length-narrativeCharacters.length;
+    });
+    town.addEventListener("keyup",function (){
+        var incidentCharacters = incident.value.split('');
+        var stateCharacters = state.value.split('');
+        var townCharacters = town.value.split('');
+        var roadCharacters = road.value.split('');
+        var narrativeCharacters = narrative.value.split('');
+        wordCount.innerText = 245-incidentCharacters.length-stateCharacters.length-townCharacters.length-roadCharacters.length-narrativeCharacters.length;
+    });
+    road.addEventListener("keyup",function (){
+        var incidentCharacters = incident.value.split('');
+        var stateCharacters = state.value.split('');
+        var townCharacters = town.value.split('');
+        var roadCharacters = road.value.split('');
+        var narrativeCharacters = narrative.value.split('');
+        wordCount.innerText = 245-incidentCharacters.length-stateCharacters.length-townCharacters.length-roadCharacters.length-narrativeCharacters.length;
+    });
+    narrative.addEventListener("keyup",function (){
+        var incidentCharacters = incident.value.split('');
+        var stateCharacters = state.value.split('');
+        var townCharacters = town.value.split('');
+        var roadCharacters = road.value.split('');
+        var narrativeCharacters = narrative.value.split('');
+        wordCount.innerText = 245-incidentCharacters.length-stateCharacters.length-townCharacters.length-roadCharacters.length-narrativeCharacters.length;
+    });
+</script>
 {% endblock %}
