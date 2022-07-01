@@ -1,4 +1,4 @@
-from mongoengine import Document, EmailField, StringField, DateTimeField, BooleanField, DecimalField
+from mongoengine import Document, EmailField, StringField, DateTimeField, BooleanField, DecimalField, ListField
 from flask_bcrypt import generate_password_hash, check_password_hash
 import string, random
 from itsdangerous import URLSafeTimedSerializer
@@ -60,6 +60,7 @@ class User(Document):
 class Calls(Document):
     dispatcher = StringField()
     dispatcher_credit = StringField()
+    secondary_dispatcherid = StringField()
     date = StringField()
     times = StringField()
     town = StringField()
@@ -75,11 +76,13 @@ class Calls(Document):
     lat = DecimalField(precision=7)
     lon = DecimalField(precision=7)
     updated = BooleanField()
+    public_credit = StringField()
     def serialize(self):
         return {
             'id': str(self.id),
             'dispatcher': self.dispatcher,
             'dispatcher_credit': self.dispatcher_credit,
+            'secondary_dispatcherid' : self.secondary_dispatcherid,
             'date': self.date,
             'times': self.times,
             'town': self.town,
@@ -95,6 +98,7 @@ class Calls(Document):
             'lat': self.lat,
             'lon': self.lon,
             'updated': self.updated,
+            'public_credit': self.public_credit,
         }
 class Chat(Document):
     dispatcher = StringField()
@@ -186,3 +190,23 @@ class Keys(Document):  # Document for Keys
             'expiration_date': self.expiration_date,
         }
 
+class Posts(Document):
+    title = StringField()
+    summary = StringField()
+    body = StringField()
+    created = DateTimeField()
+    authorid = StringField()
+    username = StringField()
+    status = StringField()
+    keywords = ListField()
+    def serialize(self):
+        return {
+            'title': self.title,
+            'summary': self.summary,
+            'body': self.body,
+            'created': self.created,
+            'authorid': self.authorid,
+            'username': self.username,
+            'status': self.status,
+            'keywords': self.keywords,
+        }

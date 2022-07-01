@@ -25,28 +25,25 @@ def signup():
     if request.method == 'POST':
         user = User(**request.form)
         email = str.lower(user.email)
-        email_check = User.get(email=email)
-        if email_check == None:
-            user.email = email
-            if user.password == user.password2:
-                user.hash_password()
-                user.password2 = ''
-                user.set_permission()
-                user.save()
-                try:
-                    send_auth_email(user)
-                except ConnectionRefusedError:
-                    logging.info('Authentication email failed')
-                    pass  # Mail server isn't working right now
-                accessToken = create_access_token(identity=str(user.id), expires_delta=datetime.timedelta(days=1))
-                resp = make_response(redirect(url_for('cad.dispatch')))  # Redirect to wherever after login
-                set_access_cookies(resp, accessToken, max_age=60 * 60 * 24)  # Expires in 1 day
-                return resp
-            else:
-                flash('Passwords do not match')
-                return render_template('signup.html')
+        #email_check = User.get(email=email)
+        #if email_check == None:
+            #user.email = email
+        if user.password == user.password2:
+            user.hash_password()
+            user.password2 = ''
+            user.set_permission()
+            user.save()
+            try:
+                send_auth_email(user)
+            except ConnectionRefusedError:
+                logging.info('Authentication email failed')
+                pass  # Mail server isn't working right now
+            accessToken = create_access_token(identity=str(user.id), expires_delta=datetime.timedelta(days=1))
+            resp = make_response(redirect(url_for('cad.dispatch')))  # Redirect to wherever after login
+            set_access_cookies(resp, accessToken, max_age=60 * 60 * 24)  # Expires in 1 day
+            return resp
         else:
-            flash('Email already registered')
+            flash('Passwords do not match')
             return render_template('signup.html')
     else:
         if request.cookies.get('access_token_cookie'):

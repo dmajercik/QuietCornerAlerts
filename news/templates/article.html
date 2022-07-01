@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block header %}
+    <title>Quiet Corner Alerts</title>
+    <style>
+  article{
+      margin-left: 2%;
+      margin-right: 2%;
+  }
+</style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7073533418232664"
+     crossorigin="anonymous"></script>
+{% endblock %}
+{% block body %}
+<br>
+<div>
+    {% for post in posts %}
+        <article class="post">
+          <header>
+            <div>
+                <h1 align="center">{{ post['title'] }}</h1>
+            <br>
+            <br>
+              <div class="about">by {{ post['authorid'] }} on {{ post['created'].strftime('%m-%d-%Y') }}</div>
+            </div>
+          </header>
+          <p class="body" align="justify">{{ post['body'] | safe}}</p>
+        <div class="keywords">
+            <p>Keywords:
+                {% for keyword in post['keywords'] %}
+                    #{{ keyword }}
+                {% endfor %}
+            </p>
+            </div>
+        </article>
+        {% if not loop.last %}
+            <hr>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

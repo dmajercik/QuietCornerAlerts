@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block header %}
+{{ ckeditor.load() }}
+{% endblock %}
+{% block body %}
+<h1>New Post</h1>
+
+<form method="post">
+
+<label for="title">Title</label>
+    <br>
+<input name="title" id="title" value="{{ request.form['title'] }}" required>
+    <br>
+    <label for="keywords">Keywords</label>
+    <br>
+<input name="keywords" id="keywords" value="{{ request.form['keywords'] }}" required>
+    <br>
+<label for="body">Body</label>
+{{ ckeditor.create() }}
+<input type="submit" value="Submit to Drafts">
+</form>
+{% endblock %}

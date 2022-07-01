@@ -1,0 +1,26 @@
+{
+  "name": "quietcorneralerts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {
+    "node-sass": "7.0.1"
+},
+"scripts" : {
+    "node-sass": "node-sass --output-style compressed -o dist/css src/scss"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dman1990m/QuietCornerAlerts.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dman1990m/QuietCornerAlerts/issues"
+  },
+  "homepage": "https://github.com/dman1990m/QuietCornerAlerts#readme",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.1.1"
+  },
+
+}

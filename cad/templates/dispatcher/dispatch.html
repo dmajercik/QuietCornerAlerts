@@ -1,8 +1,4 @@
-{% if logged == False %}
-	{% extends 'basetopnav.html' %}
-{% else %}
-	{% extends 'topnav.html' %}
-{% endif %}
+{% extends 'topnav.html' %}
 {% block header %}
 <!doctype html>
 <html>
@@ -17,82 +13,13 @@
 {% endblock header%}
 {% block body %}
 <style>
-* {
-  box-sizing: border-box;
+.content{
+    margin-left: 2%;
+    margin-right: 2%;
 }
-body{
- background-color:#545E78;
-}
-
-.row {
-  margin-left:-5px;
-  margin-right:-5px;
-}
-
-.column1 {
-  margin: auto;
-  width: 95%;
-  padding: 5px;
-  overflow: auto;
-}
-.column2 {
-  float: right;
-  width: 30%;
-  padding: 5px;
-  margin-top: 10px;
-  text-align: left;
-  border: 1px solid white;
-}
-.chatbox{
-overflow: auto;
-  height:75vh;
-  text-alight: left;
-}
-.quetable{
-overflow: auto;
-  height:25vh;
-}
-.twentyfourhrtable{
-overflow: auto;
-  height:45vh;
-}
-
-/* Clearfix (clear floats) */
-.row:after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  width: 100%;
-  border: 2px solid white;
-}
-
-table, th, td {
-  text-align: center;
-  padding: 16px;
-  border: 1px solid white;
-  border-collapse: collapse;
-}
-
-tr:nth-child(even) {
-  background-color: #7E95B1;
-}
-
-div{
-    font-size: 12px;
-    color: #FFFFFF;
-    font-family: allerta;
-    font-style: normal;
-    font-weight: 400;
-    }
-h2 {
-    text-align: center;
-}
-p{
+table{
+    border-collapse: separate;
+    border-spacing:0 5px;
     text-align: center;
 }
 </style>
@@ -113,32 +40,42 @@ p{
     }
   </script>
 <body>
-
+<div class="content">
 <div class="row">
-    <p>Join the chat at zello.com/quietcorneralerts</p>
+    <p align="center">Join the chat at zello.com/quietcorneralerts</p>
     <div id="activeusers">
-        <p>Active Users {{activeusers}}</p>
+        <p align="center">Active Users:
+        {% for user in activeusers %}
+            {{ user }}
+        {% endfor %}
+    </p>
     </div>
     <div class="column1">
-        <h2>Incident Que <a href="/newincident" class="btn btn-warning btn-xs" style="font-size: 12px"><button>New Incident</button></a></h2>
+        <h2 align="center">Incident Que <a type="button" class="btn btn-success" href="/newincident">New Incident</a></h2>
         <div id="incidenttables">
             <div class="quetable">
-                <table class="table table-hover table-dark">
-                    <tr>
-                            <th>Update</th>
-                            <th>Dispatcher</th>
-                           <th>Date</th>
-                           <th>Time</th>
-                           <th>Town</th>
-                           <th>State</th>
-                           <th>Road</th>
-                           <th>Incident Type</th>
-                           <th>Narrative</th>
-                       </tr>
-                        {% for row in que_data %}
-                        <tr>
+            <table class="table table-hover">
+  <thead>
+    <tr>
+    <th>Update</th>
+    <th>Primary Dispatcher</th>
+    <th>Secondary Dispatcher</th>
+   <th>Date</th>
+   <th>Time</th>
+   <th>Town</th>
+   <th>State</th>
+   <th>Road</th>
+   <th>Incident Type</th>
+   <th>Narrative</th>
+    <th>Buttons</th>
+    </tr>
+  </thead>
+  <tbody>
+      {% for row in que_data %}
+                        <tr class="table-default">
                             <td>{{row[9]}}</td>
                             <td>{{row[8]}}</td>
+                            <td>{{ row[10] }}</td>
                             <td>{{row[1]}}</td>
                             <td>{{row[2]}}</td>
                             <td>{{row[3]}}</td>
@@ -147,36 +84,45 @@ p{
                             <td>{{row[6]}}</td>
                             <td>{{row[7]}}</td>
                             <td>
-                                <div class="btn-group" >
-                                    <a href="/confirm/{{row[0]}}" onclick="return confirm('Are you sure the information is accurate?')"><button>Confirm</button></a>
-                                    <a href="/edit/{{row[0]}}" ><button>Edit</button></a>
-                                    <a href="/delete/{{row[0]}}" onclick="return confirm('Confirm Delete?')"><button>Delete</button></a>
-                                </div>
+                        <div class="btn-group-vertical">
+                              <a type="button" class="btn btn-primary btn-sm" href="/confirm/{{ row[0] }}">Confirm</a>
+                              <a type="button" class="btn btn-primary btn-sm" href="/edit/{{ row[0] }}">Edit</a>
+                              <a type="button" class="btn btn-danger btn-sm" href="/delete/{{ row[0] }}" onclick="return confirm('Are you sure you want to delete this incident?')">Delete</a>
+                        </div>
+
                             </td>
                         </tr>
                         {% endfor %}
+    </tr>
+    </tbody>
                 </table>
             </div>
             <br>
-            <h2>Past 24hr Incidents</h2>
+            <h2 align="center">Past 24hr Incidents</h2>
+
             <div class="twentyfourhrtable">
-                <table class="table table-hover table-dark">
-                   <tr>
-                       <th>Update</th>
-                       <th>Dispatcher</th>
-                       <th>Date</th>
-                       <th>Time</th>
-                       <th>Town</th>
-                       <th>State</th>
-                       <th>Road</th>
-                       <th>Incident Type</th>
-                       <th>Narrative</th>
-                       <th>Buttons</th>
+                <table class="table table-hover">
+  <thead>
+    <tr>
+    <th>Update</th>
+    <th>Primary Dispatcher</th>
+    <th>Secondary Dispatcher</th>
+   <th>Date</th>
+   <th>Time</th>
+   <th>Town</th>
+   <th>State</th>
+   <th>Road</th>
+   <th>Incident Type</th>
+   <th>Narrative</th>
+    <th>Buttons</th>
+    </tr>
+  </thead>
                    </tr>
                     {% for row in twentyfourhour_data %}
                     <tr>
                         <td>{{row[10]}}</td>
                         <td>{{row[8]}}</td>
+                        <td>{{ row[11] }}</td>
                         <td>{{row[1]}}</td>
                         <td>{{row[2]}}</td>
                         <td>{{row[3]}}</td>
@@ -185,10 +131,10 @@ p{
                         <td>{{row[6]}}</td>
                         <td>{{row[7]}}</td>
                         <td>
-                            <div class="btn-group-vertical">
-                                <a href="/update/{{row[0]}}" style="font-size: 12px" target="_blank"><button >Update Incident</button></a>
-                                <a href="/tweet1/{{row[0]}}" style="font-size: 12px" target="_blank"><button >Tweet Incident</button></a>
-                            </div>
+                        <div class="btn-group-vertical">
+                             <a type="button" class="btn btn-primary btn-sm" href="/tweet1/{{row[0]}}">Tweet Incident</a>
+                             <a type="button" class="btn btn-primary btn-sm" href="/update/{{row[0]}}">Update Incident</a>
+                        </div>
                         </td>
                     </tr>
                     {% endfor %}
@@ -196,6 +142,7 @@ p{
             </div>
         </div>
     </div>
+</div>
 </div>
 </body>
 {% endblock %}

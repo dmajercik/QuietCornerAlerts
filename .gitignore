@@ -12,3 +12,5 @@ cad/folium_map.html
 *.idea
 secret.config
 *.zip
+blacklist.config
+balcklist.config
