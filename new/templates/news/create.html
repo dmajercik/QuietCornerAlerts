@@ -1,0 +1,28 @@
+{% block header %}
+    <script src="//cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
+{% endblock %}
+{% block body %}
+<h1>New Post</h1>
+
+<form method="post" action="{{url_for('create_post')}}">
+
+<label for="title">Title</label>
+    <br>
+<input name="title" id="title" value="{{ request.form['title'] }}" required>
+    <br>
+    <label for="keywords">Keywords</label>
+    <br>
+<input name="keywords" id="keywords" value="{{ request.form['keywords'] }}" required>
+    <br>
+<label for="body">Body</label>
+    <form method="post">
+       <textarea name="editor1" id="editor1" rows="10" cols="80">
+            </textarea>
+            <script>
+                // Replace the <textarea id="editor1"> with a CKEditor 4
+                // instance, using default configuration.
+                CKEDITOR.replace( 'editor1' );
+            </script>
+<input type="submit" value="Submit to Drafts">
+</form>
+{% endblock %}

@@ -1,19 +1,13 @@
-from flask import Blueprint, request, render_template, redirect, url_for, jsonify, session
-from database.models import User, Calls, Chat, Keys
-from flask_jwt_extended import jwt_required, get_jwt_identity, jwt_required
-from flask_session import Session
-from flask_socketio import SocketIO, join_room, leave_room, emit
-from datetime import date
+from flask import Blueprint, request, render_template, redirect, url_for, jsonify
+from new.database.models import User, Calls, Chat, Keys
+from flask_jwt_extended import get_jwt_identity, jwt_required
 import datetime
-from time import strftime
 import logging
 from pytz import timezone
-import mongoengine
 from mongoengine.queryset.visitor import Q
 import tweepy
 from facebook import GraphAPI
 import folium
-from folium.plugins import MarkerCluster
 from geopy.geocoders import Nominatim
 import os
 import configparser

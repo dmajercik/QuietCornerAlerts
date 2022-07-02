@@ -1,14 +1,9 @@
 from flask import Blueprint, request, render_template, redirect, url_for
-from flask_jwt_extended import jwt_required, get_jwt_identity, jwt_required
-from database.models import User, Posts
-from resources.mail import send_auth_email
-import logging
+from flask_jwt_extended import get_jwt_identity, jwt_required
+from new.database.models import User, Posts
 from mongoengine.queryset.visitor import Q
-import os
 import datetime
-from time import strftime
 from pytz import timezone
-from app import ckeditor
 
 news = Blueprint('news', __name__, template_folder='templates')
 

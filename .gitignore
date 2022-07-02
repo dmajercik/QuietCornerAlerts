@@ -7,10 +7,10 @@ cad/time.py
 .DS_Store
 *venv
 cad/test.py
-cad/templates/folium_map.html
+new/templates/cad/folium_map.html
 cad/folium_map.html
 *.idea
-secret.config
+new/resources/secret.config
 *.zip
 blacklist.config
-balcklist.config
+new/resources/balcklist.config

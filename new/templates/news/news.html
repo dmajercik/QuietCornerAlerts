@@ -1,0 +1,40 @@
+
+{% block header %}
+    <title>Quiet Corner Alerts</title>
+    <style>
+  article{
+      margin-left: 2%;
+      margin-right: 2%;
+  }
+</style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7073533418232664"
+     crossorigin="anonymous"></script>
+{% endblock %}
+{% block body %}
+<h1 align="center">Quiet Corner Alerts News Articles</h1>
+<br>
+<div>
+    {% for post in posts %}
+        <article class="post">
+          <header>
+            <div>
+                <a href="/article/{{ post.id }}"><h3>{{ post['title'] }}</h3><a/>
+                    <div class="keywords">
+            <p>Keywords:
+                {% for keyword in post['keywords'] %}
+                    #{{ keyword }}
+                {% endfor %}
+            </p>
+            </div>
+              <div class="about">by {{ post['authorid'] }} on {{ post['created'].strftime('%m-%d-%Y') }}</div>
+            </div>
+          </header>
+          <p class="body" align="justify">{{ post['body'] | safe}}...</p>
+        </article>
+        {% if not loop.last %}
+            <hr>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

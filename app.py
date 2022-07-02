@@ -1,14 +1,10 @@
-from flask import Flask, session
+from flask import Flask
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
 from flask_mail import Mail
-from flask_socketio import SocketIO, join_room, leave_room, emit
-from flask_session import Session
-import threading
-from firedanger.firedangerbot import firedanger
 import configparser
-from website.server import server_start
 from flask_ckeditor import CKEditor
+
 config = configparser.RawConfigParser()
 configFilePath = r'secret.config'
 config.read(configFilePath)
@@ -31,17 +27,14 @@ ckeditor = CKEditor(app)
 mail = Mail(app)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
-threading.Thread(target=firedanger, args=(1,)) #never started this?
 
 
-from database.db import initialize_db
-from resources.routes import initialize_routes
+from new.database.db import initialize_db
+from new.resources.routes import initialize_routes
 
 initialize_db(app) # Run the function after app and config init. End of the file works well.
 
 initialize_routes(app)
-
-#server_start()
 
 # run the app.
 if __name__ == "__main__":
@@ -49,3 +42,4 @@ if __name__ == "__main__":
     # removed before deploying a production app.
     app.debug = True
     app.run()
+
