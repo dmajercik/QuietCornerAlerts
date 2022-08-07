@@ -6,14 +6,14 @@ from new.database.models import User, Posts
 from mongoengine.queryset.visitor import Q
 import datetime
 from pytz import timezone
-from new.jwt_bearer import jwtBearer
-from new.schemas import UserSchema, UserLoginSchema
 #from database.models import User
 from new import schemas
 import types
+from new.newauth import AuthHandler
+
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
-
+auth_handler = AuthHandler()
 
 tags_metadata = [
     {
@@ -45,11 +45,10 @@ async def news(request: Request):
     "/create",
     tags=["News"],
     status_code=200,
-    dependencies=[Depends(jwtBearer())],
     description="Load the create article News page",
     response_class=HTMLResponse
 )
-async def create(request: Request):
+async def create(request: Request, username=Depends(auth_handler.auth_wrapper)):
     context = {'request': request}
     return templates.TemplateResponse("/news/create.html", context)
 

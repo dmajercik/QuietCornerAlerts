@@ -94,7 +94,7 @@ button:hover {
 <body>
 
 <!-- <form action="/action_page.php" style="border:1px solid #ccc"> -->
-<form action="{{url_for('auth.signup')}}" style="border:1px solid #ccc" method="post">
+<form action="/user/signup" style="border:1px solid #ccc" method="post">
   <div class="container">
     <h1>Sign Up</h1>
     <p>Fill in the information to make an account.<br>
@@ -103,22 +103,14 @@ button:hover {
 
     <label><b>Email*</b></label>
     <input type="email" placeholder="Enter Email" name="email" required>
-
+    <label><b>Firs Name*</b></label>
+    <input type="text" placeholder="Enter Name" name="first_name" required>
+      <label><b>Last Name*</b></label>
+    <input type="text" placeholder="Enter Name" name="last_name" id="last_name"required>
+    <label><b>Phone Number*</b><small></small></label>
+    <input type="tel" id="phone" placeholder="5555555555" name="phone_number" pattern="[0-9]{10}" required>
     <label for="password"><b>Password*</b></label>
     <input type="password" placeholder="Enter Password" name="password" required>
-
-    <label for="password2"><b>Repeat Password*</b></label>
-    <input type="password" placeholder="Repeat Password" name="password2" required>
-
-	  <label><b>Dispatcher ID*</b><small> ex:XXX000</small></label>
-    <input type="text" placeholder="3 digit location & 3 digit numeric; ex: QCA001, CON001" pattern="[A-Z]{3}[0-9]{3}" name="dispatcherid" title="Three Capital Leters Followed by three numbers" required>
-
-	  <label><b>Full Name*</b></label>
-    <input type="text" placeholder="Enter Name" name="name" required>
-
-      <label><b>Phone Number*</b><small> ex:XXX-XXX-XXX | Allows you to enable text alerts</small></label>
-<input type="tel" id="phone" placeholder="XXX-XXX-XXX" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
-
     <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
 
     <div class="clearfix">

@@ -14,3 +14,4 @@ new/resources/secret.config
 *.zip
 blacklist.config
 new/resources/balcklist.config
+secret.config
